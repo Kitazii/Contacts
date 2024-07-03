@@ -12,9 +12,37 @@
 
         <Button x:Name="btnCancel" Text="cancel" Clicked="btnCancel_Clicked"></Button>
     </StackLayout>-->
-    <StackLayout>
-        <BoxView Color="Aqua" HeightRequest="50">
-            
-        </BoxView>
-    </StackLayout>
+    <VerticalStackLayout Spacing="10" Margin="20, 20, 20, 0">
+
+        <Frame Padding="10, 2, 10, 2">
+            <HorizontalStackLayout>
+                <Label Text="Name" VerticalOptions="Center" WidthRequest="60"></Label>
+                <Entry x:Name="entryName" VerticalOptions="Center"></Entry>
+            </HorizontalStackLayout>
+        </Frame>
+
+        <Frame Padding="10, 2, 10, 2">
+            <HorizontalStackLayout>
+                <Label Text="Email" VerticalOptions="Center" WidthRequest="60"></Label>
+                <Entry x:Name="entryEmail" VerticalOptions="Center"></Entry>
+            </HorizontalStackLayout>
+        </Frame>
+
+        <Frame Padding="10, 2, 10, 2">
+            <HorizontalStackLayout>
+                <Label Text="Phone" VerticalOptions="Center" WidthRequest="60"></Label>
+                <Entry x:Name="entryPhone" VerticalOptions="Center"></Entry>
+            </HorizontalStackLayout>
+        </Frame>
+
+        <Frame Padding="10, 2, 10, 2">
+            <HorizontalStackLayout>
+                <Label Text="Address" VerticalOptions="Center" WidthRequest="60"></Label>
+                <Entry x:Name="entryAddress" VerticalOptions="Center"></Entry>
+            </HorizontalStackLayout>
+        </Frame>
+
+        <Button x:Name="btnUpdate" Text="update" Clicked="btnUpdate_Clicked"></Button>
+        <Button x:Name="btnCancel" Text="cancel" Clicked="btnCancel_Clicked"></Button>
+    </VerticalStackLayout>
 </ContentPage>
