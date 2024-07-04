@@ -22,28 +22,31 @@ public partial class EditContactPage : ContentPage
         set
         {
            contact = ContactRepository.GetContactById(int.Parse(value));
-           entryName.Text = contact?.Name;
-           entryEmail.Text = contact?.Email;
-           entryPhone.Text = contact?.Phone;
-           entryAddress.Text = contact?.Address;
+           contactCtrl.Name = contact?.Name;
+           contactCtrl.Email = contact?.Email;
+           contactCtrl.Phone = contact?.Phone;
+           contactCtrl.Address = contact?.Address;
 
         }
     }
 
     private void btnUpdate_Clicked(object sender, EventArgs e)
     {
-        //Creating this contact object for the null checks
-        Contact? contact1 = new()
-        { 
-            Name = entryName.Text,
-            Email = entryEmail.Text,
-            Phone = entryPhone.Text,
-            Address = entryAddress.Text,
-        };
+             
+        if (contact != null )
+        {
+            contact.Name = contactCtrl.Name;
+            contact.Email = contactCtrl.Email;
+            contact.Phone = contactCtrl.Phone;
+            contact.Address = contactCtrl.Address;
 
-        contact = contact1;
+            ContactRepository.UpdateContact(contact.ContactId, contact);
+            Shell.Current.GoToAsync($"//{nameof(ContactPage)}");
+        }
+    }
 
-        ContactRepository.UpdateContact(contact.ContactId, contact);
-        Shell.Current.GoToAsync($"//{nameof(ContactPage)}");
+    private void contactCtrl_OnError(object sender, string e)
+    {
+        DisplayAlert("Error", e, "OK");
     }
 }

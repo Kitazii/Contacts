@@ -4,29 +4,42 @@
              x:Class="Contacts.Maui.Views.ContactPage"
              Title="Contact">
 
-    <ListView x:Name="listContacts"
-              BackgroundColor="Transparent"
-              SeparatorColor="Silver"
-              RowHeight="65"
-              ItemSelected="listContacts_ItemSelected"
-              ItemTapped="listContacts_ItemTapped"
-              >
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <TextCell 
-                    Text="{Binding Name}"
-                    Detail="{Binding Email}"></TextCell>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
+    <Grid 
+        Padding="5"
+        RowDefinitions="*, 50"
+          ColumnDefinitions="*">
+        <ListView Grid.Row="0"
+                  Grid.Column="0"
+                  x:Name="listContacts"
+                  BackgroundColor="Transparent"
+                  SeparatorColor="Silver"
+                  RowHeight="65"
+                  ItemSelected="listContacts_ItemSelected"
+                  ItemTapped="listContacts_ItemTapped"
+                  >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell 
+                        Text="{Binding Name}"
+                        Detail="{Binding Email}">
+                        <TextCell.ContextActions>
+                            <MenuItem 
+                                Text="Delete" 
+                                IsDestructive="True"
+                                Clicked="Delete_Clicked"
+                                CommandParameter="{Binding .}"></MenuItem> <!---This binds to the contact object (the instance in the items source im guessing)-->
+                        </TextCell.ContextActions>
 
-    <!--<VerticalStackLayout Spacing="5">
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+                    </TextCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
 
-        <Button x:Name="btnEditContact" Clicked="btnEditContact_Clicked" Text="Edit Contact"></Button>
-        <Button x:Name="btnAddContact" Clicked="btnAddContact_Clicked" Text="Add Contact"></Button>
-    </VerticalStackLayout>-->
+        <Button 
+            Grid.Row="1"
+            Grid.Column="0"
+            x:Name="btnAdd" 
+            Text="Add Contact" 
+            Clicked="btnAdd_Clicked"></Button>
+    </Grid>
 </ContentPage>
