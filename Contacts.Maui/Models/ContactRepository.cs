@@ -11,9 +11,9 @@ namespace Contacts.Maui.Models
         public static List<Contact> _contacts = new() 
         {
             new Contact { ContactId = 0, Name = "John Doe", Email = "JohnDoe@Gmail.com", Phone = "078557388209", Address = "123, Glasgow Street" },
-            new Contact { ContactId = 1, Name = "Jane Doe", Email = "JaneDoe@Gmail.com", Phone = "078557388209", Address = "123, Glasgow Street" },
-            new Contact { ContactId = 2, Name = "Tom Hanks", Email = "TomHanks@Gmail.com", Phone = "078557388209", Address = "123, Glasgow Street" },
-            new Contact { ContactId = 3, Name = "Frank Liu", Email = "FrankLiu@Gmail.com", Phone = "078557388209", Address = "123, Glasgow Street" }
+            new Contact { ContactId = 1, Name = "Jane Doe", Email = "JaneDoe@Gmail.com", Phone = "07456367377", Address = "45, Edinbrugh Way" },
+            new Contact { ContactId = 2, Name = "Tom Hanks", Email = "TomHanks@Gmail.com", Phone = "079787465488", Address = "1, Bristle Ave" },
+            new Contact { ContactId = 3, Name = "Frank Liu", Email = "FrankLiu@Gmail.com", Phone = "078765757575", Address = "32, Highland Street" }
         };
 
         public static List<Contact> GetContacts() => _contacts;
@@ -64,6 +64,29 @@ namespace Contacts.Maui.Models
             {
                 _contacts.Remove(contact);
             }
+        }
+
+        public static List<Contact> SearchContacts(string filterText)
+        {
+            var contacts = _contacts.Where(x => !string.IsNullOrWhiteSpace(x.Name) && x.Name?.StartsWith(filterText, StringComparison.OrdinalIgnoreCase) == true)?.ToList();
+
+            if (contacts == null || contacts?.Count <= 0)
+                contacts = _contacts.Where(x => !string.IsNullOrWhiteSpace(x.Email) && x.Email?.StartsWith(filterText, StringComparison.OrdinalIgnoreCase) == true)?.ToList();
+            else
+                return contacts ?? new();
+
+            if (contacts == null || contacts?.Count <= 0)
+                contacts = _contacts.Where(x => !string.IsNullOrWhiteSpace(x.Phone) && x.Phone?.StartsWith(filterText, StringComparison.OrdinalIgnoreCase) == true)?.ToList();
+            else
+                return contacts ?? new();
+
+            if (contacts == null || contacts?.Count <= 0)
+                contacts = _contacts.Where(x => !string.IsNullOrWhiteSpace(x.Address) && x.Address?.StartsWith(filterText, StringComparison.OrdinalIgnoreCase) == true)?.ToList();
+            else
+                return contacts ?? new();
+
+            return contacts ?? new();
+            
         }
     }
 }
